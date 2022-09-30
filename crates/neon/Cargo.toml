@@ -79,7 +79,7 @@ doc-dependencies = ["doc-comment", "aquamarine"]
 [package.metadata.docs.rs]
 rustdoc-args = ["--cfg", "docsrs"]
 features = [
-    "futures",
-    "napi-experimental",
-    "doc-dependencies",
+  "futures",
+  "napi-experimental",
+  "doc-dependencies",
 ]
