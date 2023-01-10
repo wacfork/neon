@@ -108,6 +108,9 @@ fn main(mut cx: ModuleContext) -> NeonResult<()> {
     cx.export_function("add1", add1)?;
 
     cx.export_function("return_js_string", return_js_string)?;
+    cx.export_function("return_js_string_utf16", return_js_string_utf16)?;
+    cx.export_function("return_length_utf8", return_length_utf8)?;
+    cx.export_function("return_length_utf16", return_length_utf16)?;
     cx.export_function("run_string_as_script", run_string_as_script)?;
 
     cx.export_function("return_js_number", return_js_number)?;
@@ -384,6 +387,7 @@ fn main(mut cx: ModuleContext) -> NeonResult<()> {
     cx.export_function("stash_global_object", js::workers::stash_global_object)?;
     cx.export_function("unstash_global_object", js::workers::unstash_global_object)?;
     cx.export_function("reject_after", js::workers::reject_after)?;
+    cx.export_function("box_channels", js::workers::box_channels)?;
 
     // Futures
     cx.export_function("lazy_async_add", js::futures::lazy_async_add)?;

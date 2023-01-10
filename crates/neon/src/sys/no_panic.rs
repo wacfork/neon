@@ -51,7 +51,8 @@ impl FailureBoundary {
         F: FnOnce(Option<Env>) -> Local,
     {
         // Make `env = None` if unable to call into JS
-        let env = can_call_into_js(env).then_some(env);
+        #[allow(clippy::unnecessary_lazy_evaluations)]
+        let env = can_call_into_js(env).then(|| env);
 
         // Run the user supplied callback, catching panics
         // This is unwind safe because control is never yielded back to the caller

@@ -65,6 +65,17 @@ mod napi1 {
                 result: *mut usize,
             ) -> Status;
 
+            // The `buf` argument is defined as a `char16_t` which _should_ be a `u16` on most
+            // platforms. When generating bindings with `rust-bindgen` it unconditionally defines
+            // it as `u16` as well.
+            fn get_value_string_utf16(
+                env: Env,
+                value: Value,
+                buf: *mut u16,
+                bufsize: usize,
+                result: *mut usize,
+            ) -> Status;
+
             fn create_type_error(env: Env, code: Value, msg: Value, result: *mut Value) -> Status;
 
             fn create_range_error(env: Env, code: Value, msg: Value, result: *mut Value) -> Status;
@@ -198,6 +209,7 @@ mod napi1 {
 
             fn strict_equals(env: Env, lhs: Value, rhs: Value, result: *mut bool) -> Status;
 
+            #[cfg(feature = "external-buffers")]
             fn create_external_arraybuffer(
                 env: Env,
                 data: *mut c_void,
@@ -207,6 +219,7 @@ mod napi1 {
                 result: *mut Value,
             ) -> Status;
 
+            #[cfg(feature = "external-buffers")]
             fn create_external_buffer(
                 env: Env,
                 length: usize,
